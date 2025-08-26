@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi ZI Tambahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .card.active {
+            border-color: #0d9488;
+            background-color: #e0f2f1;
+        }
+        .info-panel {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: #f0f9ff;
+            border-radius: 1rem;
+            border: 1px solid #cce8ff;
+        }
+        .info-panel.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .glow {
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #0d9488, 0 0 10px #0d9488; }
+            to { box-shadow: 0 0 10px #0d9488, 0 0 20px #0d9488; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+<div class="container">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-teal-700 leading-tight">Materi Mendalam:<br>Pilar 5 & 6 Inisiatif ZI</h1>
+        <p class="mt-4 text-lg text-gray-600">Jelajahi detail program-program penting dari Buku Pintar ZI. Klik pada setiap kartu untuk info lebih lanjut!</p>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- MARITEMAN Card -->
+        <div class="card" data-program="mariteman">
+            <h3 class="text-xl font-bold text-teal-600">MARITEMAN</h3>
+            <p class="text-gray-500 text-sm mt-1">Aplikasi Manajemen Risiko</p>
+        </div>
+
+        <!-- Benturan Kepentingan Card -->
+        <div class="card" data-program="benturan">
+            <h3 class="text-xl font-bold text-blue-600">Benturan Kepentingan</h3>
+            <p class="text-gray-500 text-sm mt-1">Akar Korupsi</p>
+        </div>
+
+        <!-- Kanal Pengaduan Card -->
+        <div class="card" data-program="pengaduan">
+            <h3 class="text-xl font-bold text-indigo-600">Kanal Pengaduan</h3>
+            <p class="text-gray-500 text-sm mt-1">Saluran Masyarakat</p>
+        </div>
+
+        <!-- Unit Pengendalian Gratifikasi Card -->
+        <div class="card" data-program="gratifikasi">
+            <h3 class="text-xl font-bold text-green-600">Unit Pengendalian Gratifikasi</h3>
+            <p class="text-gray-500 text-sm mt-1">Kegiatan Pencegahan</p>
+        </div>
+
+        <!-- PARHOBAS Card -->
+        <div class="card" data-program="parhobas">
+            <h3 class="text-xl font-bold text-orange-600">PARHOBAS</h3>
+            <p class="text-gray-500 text-sm mt-1">Pelatihan Hospitality</p>
+        </div>
+    </div>
+
+    <!-- Info Panel Section -->
+    <div id="info-panel" class="info-panel">
+        <h2 id="info-title" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+        <p id="info-description" class="text-gray-700"></p>
+        <div id="info-details" class="mt-4 border-l-4 border-gray-400 pl-4 space-y-2"></div>
+    </div>
+</div>
+
+<script>
+    const cards = document.querySelectorAll('.card');
+    const infoPanel = document.getElementById('info-panel');
+    const infoTitle = document.getElementById('info-title');
+    const infoDescription = document.getElementById('info-description');
+    const infoDetails = document.getElementById('info-details');
+
+    const programData = {
+        mariteman: {
+            title: 'MARITEMAN',
+            description: 'MARITEMAN adalah aplikasi yang dimanfaatkan BPS Provinsi Sumatera Utara untuk mengelola dan mendokumentasikan manajemen risiko. Dengan aplikasi ini, seluruh tahapan manajemen risiko dapat didokumentasikan secara terpusat.',
+            details: [
+                '**Fungsi:** Mendokumentasikan identifikasi risiko dan rencana tindak penanganan (RTP).',
+                '**Tujuan:** Memberikan keyakinan bahwa BPS dapat mencapai sasarannya dengan mengelola potensi risiko secara efektif.'
+            ]
+        },
+        benturan: {
+            title: 'Benturan Kepentingan',
+            description: 'Menurut dokumen, benturan kepentingan dianggap sebagai **akar/sumber dari terjadinya korupsi**. Penanganan benturan kepentingan menjadi salah satu tindakan pencegahan utama terhadap korupsi.',
+            details: [
+                '**Definisi:** Situasi di mana kepentingan pribadi atau profesional seseorang dapat mengganggu pelaksanaan tugasnya secara objektif.',
+                '**Kegiatan Pencegahan:** Sosialisasi, penandatanganan Surat Pernyataan Potensi Benturan Kepentingan, dan pemasangan poster.'
+            ]
+        },
+        pengaduan: {
+            title: 'Kanal Pengaduan Masyarakat',
+            description: 'BPS Provinsi Sumatera Utara menyediakan berbagai kanal resmi untuk menerima pengaduan, keluhan, atau aspirasi dari masyarakat terkait pelayanan publik.',
+            details: [
+                '**Kanal Resmi:** SP4N LAPOR!, Email Pengaduan (pengaduan1200@bps.go.id), WhatsApp (081161661200), Kotak Saran/Pengaduan, dan Aplikasi CEMANA.',
+                '**Pengecualian:** **Telepon pribadi pimpinan** tidak termasuk dalam kanal pengaduan resmi yang disediakan.'
+            ]
+        },
+        gratifikasi: {
+            title: 'Unit Pengendalian Gratifikasi',
+            description: 'BPS Provinsi Sumatera Utara memiliki Unit Pengendalian Gratifikasi yang melakukan berbagai kegiatan untuk mencegah praktik gratifikasi di lingkungan kerja.',
+            details: [
+                '**Salah Satu Kegiatan:** **Membuat laporan bulanan mengenai penanganan gratifikasi.**',
+                '**Kegiatan Lainnya:** Sosialisasi antigratifikasi secara rutin, serta penanganan gratifikasi yang dilakukan sesuai dengan SOP yang telah ditetapkan.'
+            ]
+        },
+        parhobas: {
+            title: 'PARHOBAS',
+            description: 'PARHOBAS (Program Belajar Hospitality Tanpa Batas) adalah pelatihan yang bertujuan untuk meningkatkan kompetensi pegawai, khususnya dalam aspek pelayanan prima.',
+            details: [
+                '**Fokus Pelatihan:** Meningkatkan kompetensi pegawai dalam aspek **Hospitality** atau keramahan dan pelayanan.',
+                '**Tujuan:** Memberikan *refreshing* dan pelatihan kepada seluruh petugas layanan agar dapat memberikan pelayanan prima kepada masyarakat.'
+            ]
+        }
+    };
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Remove active class and glow from all cards
+            cards.forEach(c => {
+                c.classList.remove('active');
+                c.classList.remove('glow');
+            });
+
+            // Add active class and glow to the clicked card
+            card.classList.add('active');
+            card.classList.add('glow');
+
+            // Get the data for the selected program
+            const programKey = card.dataset.program;
+            const data = programData[programKey];
+
+            // Update info panel content
+            infoTitle.textContent = data.title;
+            infoDescription.textContent = data.description;
+            infoDetails.innerHTML = '';
+            data.details.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = item;
+                infoDetails.appendChild(li);
+            });
+
+            // Show the info panel
+            infoPanel.classList.add('show');
+        });
+    });
+</script>
+
+</body>
+</html>
 
